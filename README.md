@@ -28,4 +28,4 @@ Diesmal ändern Sie das Datum und die Uhrzeit auf ein vergangenes Datum und eine
 
 Speichern Sie die Änderungen in der HTML-Datei und öffnen Sie sie in einem Webbrowser Ihrer Wahl, um den aktualisierten Countdown und die Konfetti-Animation zu sehen.
 
-Das ist alles! Sie haben nun erfolgreich den Countdown und die Konfetti-Animation auf dieser HTML-Seite angepasst und können sie nach Ihren Vorstellungen verwenden. Bei Fragen oder Problemen können Sie sich gerne an den Entwickler wenden. Viel Spaß beim Nutzen der Countdown-HTML-Seite!
+Sie haben nun erfolgreich den Countdown und die Konfetti-Animation auf dieser HTML-Seite angepasst und können sie nach Ihren Vorstellungen verwenden. Viel Spaß beim Nutzen der Countdown-HTML-Seite!
