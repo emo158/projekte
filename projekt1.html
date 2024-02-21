@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(to left, #0083da, #2f00ff, #a200ff, #9900ff);
+            background-size: 300% 200%;
+            animation: gradientAnimation 20s linear infinite;
+        }
+
+        #gif {
+            position: fixed;
+            top: 30%; 
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            width: 300px; 
+            height: 200px; 
+        }
+
+        #countdown-container {
+            display: inline-block;
+            position: relative;
+        }
+
+        #countdown {
+            font-size: 2em;
+            color: #bdbdbd;
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+        }
+
+        #countdown-border {
+            border: 2px solid transparent;
+            padding: 20px;
+            border-radius: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            animation: borderAnimation 20s linear infinite;
+        }
+
+        #konfetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            z-index: 3;
+        }
+
+        .konfetti {
+            font-size: 100px;
+            opacity: 0;
+            position: absolute;
+            transition: transform 3s ease, opacity 3s ease;
+        }
+
+        @keyframes gradientAnimation {
+            0%, 100% {
+                background-position: 0% 70%;
+            }
+            50% {
+                background-position: 100% 70%;
+            }
+            51%, 101% {
+                background-position: 100% 70%;
+            }
+        }
+
+        @keyframes borderAnimation {
+            0%, 50%, 100% {
+                border-color: black;
+            }
+            25%, 75% {
+                border-color: white;
+            }
+        }
+
+        @keyframes konfettiAnimation {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 1.0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Countdown bis zur Auflösung</h1>
+<div id="countdown-container">
+    <div id="countdown-border"></div>
+    <div id="countdown"></div>
+</div>
+
+<div id="konfetti-container"></div>
+
+<img id="gif" src="file:///C:/Users/P A T R O N 1 5 8/Desktop/R.gif" alt="Animated GIF">
+
+<script>
+    const targetDate = new Date("2024-02-21T21:54:39").getTime();
+    let konfettiCount = 0;
+
+    function updateCountdown() {
+        const currentDate = new Date().getTime();
+        const difference = targetDate - currentDate;
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML = `${days} Tage, ${hours} Stunden, ${minutes} Minuten, ${seconds} Sekunden`;
+
+        if (difference > 0) {
+            
+            document.getElementById("gif").style.display = "block";
+        } else {
+            
+            document.getElementById("gif").style.display = "none";
+            document.getElementById("countdown").innerHTML = "🕺ulala🕺";
+            startKonfetti();
+        }
+    }
+
+
+    function startKonfetti() {
+        const konfettiContainer = document.getElementById("konfetti-container");
+
+        const createKonfetti = (emoji, horizontal, vertical) => {
+            const konfetti = document.createElement("div");
+            konfetti.className = "konfetti";
+            konfetti.innerHTML = emoji;
+            konfetti.style.transform = `translateY(0) rotate(0deg)`;
+            konfetti.style.opacity = 0;
+            konfetti.style.left = `${horizontal}%`;
+            konfetti.style.top = `${vertical}%`;
+
+            konfettiContainer.appendChild(konfetti);
+
+            
+            void konfetti.offsetWidth;
+
+            konfetti.style.transform = `translateY(100vh) rotate(720deg)`;
+            konfetti.style.opacity = 1;
+        };
+
+        const konfettiInterval = setInterval(() => {
+            if (konfettiCount >= 25) {
+                clearKonfetti();
+                konfettiCount = 0;
+            }
+
+            createKonfetti("🎉", Math.random() * 100, Math.random() * 50);
+            konfettiCount += 1;
+        }, 3000);
+    }
+
+    function clearKonfetti() {
+        const konfettiContainer = document.getElementById("konfetti-container");
+        const konfettiElements = document.getElementsByClassName("konfetti");
+
+        for (const konfetti of konfettiElements) {
+            konfetti.style.transition = "transform 1s ease, opacity 1s ease";
+            konfetti.style.transform = `translateY(0) rotate(0deg)`;
+            konfetti.style.opacity = 0;
+        }
+
+        setTimeout(() => {
+            for (const konfetti of konfettiElements) {
+                konfetti.style.transition = ""; 
+                konfettiContainer.removeChild(konfetti);
+            }
+        }, 1000);
+    }
+
+    setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
