@@ -24,7 +24,14 @@ const targetDate = new Date("2024-02-21T21:54:39").getTime();
 
 Diesmal ändern Sie das Datum und die Uhrzeit auf ein vergangenes Datum und eine vergangene Uhrzeit Ihrer Wahl. Stellen Sie sicher, dass das Datum in der Vergangenheit liegt.
 
-4. Speichern und Öffnen:
+4. Aktualisierung des GIF-Pfads:
+
+Damit das GIF ordnungsgemäß funktioniert, müssen Sie den Pfad aktualisieren. Suchen Sie nach der Zeile:
+
+<img id="gif" src="file:///C:/Users/P A T R O N 1 5 8/Desktop/R.gif" alt="Animated GIF">
+Ersetzen Sie den Pfad "C:/Users/P A T R O N 1 5 8/Desktop/R.gif" durch den korrekten Pfad zu Ihrer GIF-Datei auf Ihrem lokalen System.
+
+5. Speichern und Öffnen:
 
 Speichern Sie die Änderungen in der HTML-Datei und öffnen Sie sie in einem Webbrowser Ihrer Wahl, um den aktualisierten Countdown und die Konfetti-Animation zu sehen.
 
